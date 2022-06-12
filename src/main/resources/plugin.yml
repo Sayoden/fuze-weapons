@@ -1,0 +1,7 @@
+name: FuzeWeapon
+version: '${project.version}'
+main: fr.sayoden.fuzeweapon.FuzeWeapon
+api-version: 1.16
+author: Sayoden
+commands:
+  weapon:
