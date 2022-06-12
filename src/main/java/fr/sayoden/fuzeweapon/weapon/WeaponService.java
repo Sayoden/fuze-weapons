@@ -1,6 +1,7 @@
 package fr.sayoden.fuzeweapon.weapon;
 
 import fr.sayoden.fuzeweapon.FuzeWeapon;
+import fr.sayoden.fuzeweapon.weapon.weapons.LaserWeapon;
 import fr.sayoden.fuzeweapon.weapon.weapons.MachineGunWeapon;
 import lombok.Getter;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ public class WeaponService {
         FuzeWeapon plugin = FuzeWeapon.getPlugin();
         weapons = new ArrayList<>();
         weapons.add(new MachineGunWeapon());
+        weapons.add(new LaserWeapon());
     }
 
     /**

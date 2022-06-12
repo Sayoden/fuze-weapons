@@ -3,7 +3,6 @@ package fr.sayoden.fuzeweapon.weapon.listeners;
 import fr.sayoden.fuzeweapon.FuzeWeapon;
 import fr.sayoden.fuzeweapon.utils.ItemUtils;
 import fr.sayoden.fuzeweapon.weapon.AWeapon;
-import fr.sayoden.fuzeweapon.weapon.tasks.ShootTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,19 +24,22 @@ public class WeaponListener implements Listener {
             return;
         }
 
-        Optional<AWeapon> weapon = FuzeWeapon.getPlugin().getWeaponService().findWeaponWithId((String) ItemUtils.getTag(itemInHand, "name", String.class));
+        String name = (String) ItemUtils.getTag(itemInHand, "name", String.class);
 
-        if (weapon.isPresent()) {
-            new ShootTask(player, weapon.get(), player.getLocation(), player.getEyeLocation());
-            Bukkit.broadcastMessage((String) ItemUtils.getTag(itemInHand, "name", String.class));
-            Bukkit.broadcastMessage("Bullets " + ItemUtils.getTag(itemInHand, "bullets", Integer.class));
+        if (name != null) {
+            Optional<AWeapon> weapon = FuzeWeapon.getPlugin().getWeaponService().findWeaponWithId(name);
+            if (weapon.isPresent()) {
+                weapon.get().shoot(player);
+                Bukkit.broadcastMessage(name);
+                Bukkit.broadcastMessage("Bullets " + ItemUtils.getTag(itemInHand, "bullets", Integer.class));
+            }
         }
-
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "MachineGunWeapon");
+        FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "LaserWeapon");
     }
 
 }

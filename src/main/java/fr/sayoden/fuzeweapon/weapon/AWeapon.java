@@ -5,10 +5,13 @@ import fr.sayoden.fuzeweapon.utils.FuzeWeaponConstants;
 import fr.sayoden.fuzeweapon.utils.ItemUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 @Getter
 public abstract class AWeapon {
@@ -45,7 +48,17 @@ public abstract class AWeapon {
     public void giveWeaponToPlayer(Player player) {
         ItemStack item = new ItemStack(weaponItem).clone();
         item = ItemUtils.setTag(item, "bullets", 25);
-        item = ItemUtils.setTag(item, "name", name);
+        item = ItemUtils.setTag(item, "name", id);
         player.getInventory().addItem(item);
+    }
+
+    public void shoot(Player shooter) {
+
+    }
+
+    public void shootParticle(Player player, Particle particle, double velocity) {
+        Location location = player.getEyeLocation();
+        Vector direction = location.getDirection();
+        player.getWorld().spawnParticle(particle, location.getX(), location.getY(), location.getZ(), 0, (float) direction.getX(), (float) direction.getY(), (float) direction.getZ(), velocity, null);
     }
 }
