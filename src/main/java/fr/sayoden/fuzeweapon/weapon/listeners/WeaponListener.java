@@ -4,9 +4,12 @@ import fr.sayoden.fuzeweapon.FuzeWeapon;
 import fr.sayoden.fuzeweapon.utils.ItemUtils;
 import fr.sayoden.fuzeweapon.weapon.AWeapon;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -29,6 +32,7 @@ public class WeaponListener implements Listener {
         if (name != null) {
             Optional<AWeapon> weapon = FuzeWeapon.getPlugin().getWeaponService().findWeaponWithId(name);
             if (weapon.isPresent()) {
+                event.setCancelled(true);
                 weapon.get().shoot(player);
                 Bukkit.broadcastMessage(name);
                 Bukkit.broadcastMessage("Bullets " + ItemUtils.getTag(itemInHand, "bullets", Integer.class));
@@ -41,6 +45,7 @@ public class WeaponListener implements Listener {
         FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "MachineGunWeapon");
         FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "LaserWeapon");
         FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "PoseidonWeapon");
+        FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "FishLauncherWeapon");
     }
 
 }

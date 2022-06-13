@@ -78,6 +78,8 @@ public class PoseidonWeapon extends AWeapon {
     }
 
     private void playTsunami(Player player) {
+        Bukkit.broadcastMessage("§4§lMouahahahahahaha !!! Tu vas comprendre la terreur");
+        player.sendMessage("§8§oCours le plus vite possible pour échapper au Tsunami...");
         final World world = Bukkit.getWorld("world");
         Location tsunamiStartLocation = player.getLocation();
         tsunamiStartLocation.setX(tsunamiStartLocation.getX() + (TSUNAMI_SIZE * 2));
@@ -88,7 +90,7 @@ public class PoseidonWeapon extends AWeapon {
 
             @Override
             public void run() {
-                for (double z = tsunamiStartLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiStartLocation.getZ() + (TSUNAMI_SIZE * 2); z++) {
+                for (double z = tsunamiStartLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiStartLocation.getZ() + (TSUNAMI_SIZE * 3); z++) {
                     Location location = new Location(world, x, y, z);
                     Block blockAt = world.getBlockAt(location);
                     if (blockAt.getType().equals(Material.AIR)) {
@@ -105,14 +107,15 @@ public class PoseidonWeapon extends AWeapon {
 
                 if (x <= tsunamiStartLocation.getX() - TSUNAMI_SIZE) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 50, 3));
-                    destroyMapEffect(tsunamiStartLocation);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 50, 3));
+                    submersionEffect(tsunamiStartLocation);
                     cancel();
                 }
             }
-        }.runTaskTimer(FuzeWeapon.getPlugin(), 0L, 25L);
+        }.runTaskTimer(FuzeWeapon.getPlugin(), 0L, 18L);
     }
 
-    private void destroyMapEffect(Location tsunamiLocation) {
+    private void submersionEffect(Location tsunamiLocation) {
         System.out.println("Destroy map effect");
         final double sizeEffect = 120;
         final double initialYLocation = tsunamiLocation.getY() - 20;
@@ -122,7 +125,7 @@ public class PoseidonWeapon extends AWeapon {
 
             @Override
             public void run() {
-                for (double z = tsunamiLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 2); z++) {
+                for (double z = tsunamiLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 3); z++) {
                     Location location = new Location(Bukkit.getWorld("world"), x, initialYLocation, z);
                     while (true) {
                         if (location.getBlock().getType().equals(Material.AIR)) {
@@ -146,7 +149,7 @@ public class PoseidonWeapon extends AWeapon {
         final int chunkWaterSize = 20;
         tsunamiLocation.setZ(tsunamiLocation.getZ() - TSUNAMI_SIZE);
 
-        for (double z = tsunamiLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 2); z++) {
+        for (double z = tsunamiLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 3); z++) {
             for (double x = tsunamiLocation.getX(); x <= tsunamiLocation.getX() + chunkWaterSize; x++) {
                 Bukkit.getWorld("world").getBlockAt(new Location(Bukkit.getWorld("world"), x, tsunamiLocation.getY() + (TSUNAMI_SIZE * 2), z)).setType(Material.WATER);
             }
