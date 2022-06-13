@@ -40,6 +40,7 @@ public class WeaponListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "MachineGunWeapon");
         FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "LaserWeapon");
+        FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "PoseidonWeapon");
     }
 
 }
