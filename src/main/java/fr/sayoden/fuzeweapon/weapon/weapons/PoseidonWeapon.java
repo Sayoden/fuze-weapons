@@ -93,7 +93,7 @@ public class PoseidonWeapon extends AWeapon {
                     Block blockAt = world.getBlockAt(location);
                     if (blockAt.getType().equals(Material.AIR)) {
                         int randomNumber = FuzeWeaponConstants.RANDOM.nextInt(100 + 1) + 1;
-                        if (randomNumber <= 3) {
+                        if (randomNumber <= 2) {
                             Bukkit.getWorld("world").strikeLightningEffect(blockAt.getLocation());
                         } else {
                             blockAt.setType(Material.WATER);
@@ -103,23 +103,50 @@ public class PoseidonWeapon extends AWeapon {
                 y = y - 2;
                 x--;
 
-                if (x <= tsunamiStartLocation.getX() - (TSUNAMI_SIZE * 2)) {
-                    destoryMapEffect();
+                if (x <= tsunamiStartLocation.getX() - TSUNAMI_SIZE) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 50, 3));
+                    destroyMapEffect(tsunamiStartLocation);
                     cancel();
                 }
             }
         }.runTaskTimer(FuzeWeapon.getPlugin(), 0L, 25L);
     }
 
-    private void destoryMapEffect() {
+    private void destroyMapEffect(Location tsunamiLocation) {
+        System.out.println("Destroy map effect");
+        final double sizeEffect = 120;
+        final double initialYLocation = tsunamiLocation.getY() - 20;
 
+        new BukkitRunnable() {
+            private double x = tsunamiLocation.getX() - TSUNAMI_SIZE;
+
+            @Override
+            public void run() {
+                for (double z = tsunamiLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 2); z++) {
+                    Location location = new Location(Bukkit.getWorld("world"), x, initialYLocation, z);
+                    while (true) {
+                        if (location.getBlock().getType().equals(Material.AIR)) {
+                            location.getBlock().setType(Material.WATER);
+                            break;
+                        } else {
+                            location.add(0, 1, 0);
+                        }
+                    }
+                }
+
+                x--;
+                if (x <= (tsunamiLocation.getX() - TSUNAMI_SIZE) - sizeEffect) {
+                    cancel();
+                }
+            }
+        }.runTaskTimer(FuzeWeapon.getPlugin(), 0L, 5L);
     }
 
     private void fillChunkWater(Location tsunamiLocation) {
         final int chunkWaterSize = 20;
         tsunamiLocation.setZ(tsunamiLocation.getZ() - TSUNAMI_SIZE);
 
-        for (double z = tsunamiLocation.getZ(); z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 2); z++) {
+        for (double z = tsunamiLocation.getZ() - TSUNAMI_SIZE; z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 2); z++) {
             for (double x = tsunamiLocation.getX(); x <= tsunamiLocation.getX() + chunkWaterSize; x++) {
                 Bukkit.getWorld("world").getBlockAt(new Location(Bukkit.getWorld("world"), x, tsunamiLocation.getY() + (TSUNAMI_SIZE * 2), z)).setType(Material.WATER);
             }
