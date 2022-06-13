@@ -21,8 +21,6 @@ import java.awt.*;
 
 public class FishLauncherWeapon extends AWeapon {
 
-    private static final int SPAWN_PIG_AMOUNT = 20;
-
     public FishLauncherWeapon() {
         super("FishLauncherWeapon",
                 "Lanceur de poisson",
@@ -64,15 +62,10 @@ public class FishLauncherWeapon extends AWeapon {
             public void run() {
                 timer++;
                 Bukkit.broadcastMessage("§b§lMECHANT POISSON: §b" + (timer % 2 == 0 ? "Tac" : "Tic") + " ...");
-
-                if (timer == 3) {
-                    for (int i = 0; i < SPAWN_PIG_AMOUNT; i++) {
-                        Entity pig = world.spawnEntity(item.getLocation(), EntityType.PIG);
-                        Vector pigVelocity = pig.getVelocity();
-                        pigVelocity.setY(5);
-                        pig.setVelocity(pigVelocity);
-                    }
-                }
+                Entity pig = world.spawnEntity(item.getLocation(), EntityType.PIG);
+                Vector pigVelocity = pig.getVelocity();
+                pigVelocity.setY(3.5);
+                pig.setVelocity(pigVelocity);
 
                 if (timer == 6) {
                     new ParticleBuilder(ParticleEffect.REDSTONE)
