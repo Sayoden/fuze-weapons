@@ -30,7 +30,6 @@ public class PoseidonWeapon extends AWeapon {
                         .setName("Sceptre de Poséidon"));
 
         setFiringRate(getFiringRate() * 5);
-
         this.zoneEffectRange = 10;
     }
 
@@ -101,14 +100,19 @@ public class PoseidonWeapon extends AWeapon {
                         }
                     }
                 }
-                y = y - (FuzeWeaponConstants.RANDOM.nextInt(4 + 2) + 2);
+                y = y - 2;
                 x--;
 
                 if (x <= tsunamiStartLocation.getX() - (TSUNAMI_SIZE * 2)) {
+                    destoryMapEffect();
                     cancel();
                 }
             }
         }.runTaskTimer(FuzeWeapon.getPlugin(), 0L, 25L);
+    }
+
+    private void destoryMapEffect() {
+
     }
 
     private void fillChunkWater(Location tsunamiLocation) {
@@ -117,7 +121,7 @@ public class PoseidonWeapon extends AWeapon {
 
         for (double z = tsunamiLocation.getZ(); z <= tsunamiLocation.getZ() + (TSUNAMI_SIZE * 2); z++) {
             for (double x = tsunamiLocation.getX(); x <= tsunamiLocation.getX() + chunkWaterSize; x++) {
-                Bukkit.getWorld("world").getBlockAt(new Location(Bukkit.getWorld("world"), x, tsunamiLocation.getY() + TSUNAMI_SIZE, z)).setType(Material.WATER);
+                Bukkit.getWorld("world").getBlockAt(new Location(Bukkit.getWorld("world"), x, tsunamiLocation.getY() + (TSUNAMI_SIZE * 2), z)).setType(Material.WATER);
             }
         }
     }
