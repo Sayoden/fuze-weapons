@@ -18,6 +18,8 @@ public abstract class AWeapon {
 
     private final String id;
 
+    private final int customModelData;
+
     private final String name;
 
     private final String description;
@@ -36,8 +38,9 @@ public abstract class AWeapon {
     @Setter
     private int reloadTime;
 
-    public AWeapon(String id, String name, String description, FuzeItemStack weaponItem) {
+    public AWeapon(String id, int customModelData, String name, String description, FuzeItemStack weaponItem) {
         this.id = id;
+        this.customModelData = customModelData;
         this.name = name;
         this.description = description;
         this.weaponItem = weaponItem;
@@ -49,11 +52,14 @@ public abstract class AWeapon {
         ItemStack item = new ItemStack(weaponItem).clone();
         item = ItemUtils.setTag(item, "bullets", 25);
         item = ItemUtils.setTag(item, "name", id);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(customModelData);
+        item.setItemMeta(itemMeta);
         player.getInventory().addItem(item);
     }
 
     public void shoot(Player shooter) {
-
+        shooter.playSound(shooter.getLocation(), this.id.toLowerCase(), 1, 1);
     }
 
     public void shootParticle(Player player, Particle particle, double velocity) {

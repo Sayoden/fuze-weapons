@@ -1,5 +1,6 @@
 package fr.sayoden.fuzeweapon;
 
+import fr.sayoden.fuzeweapon.commands.WeaponCommand;
 import fr.sayoden.fuzeweapon.weapon.listeners.WeaponListener;
 import fr.sayoden.fuzeweapon.weapon.WeaponService;
 import lombok.Getter;
@@ -23,6 +24,10 @@ public class FuzeWeapon extends JavaPlugin {
         this.weaponService = new WeaponService();
 
         registerListeners();
+
+        WeaponCommand weaponCommand = new WeaponCommand();
+        this.getCommand("weapon").setExecutor(weaponCommand);
+        this.getCommand("weapon").setTabCompleter(weaponCommand);
     }
 
     @Override

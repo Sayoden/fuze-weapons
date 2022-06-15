@@ -24,9 +24,10 @@ public class PoseidonWeapon extends AWeapon {
 
     public PoseidonWeapon() {
         super("PoseidonWeapon",
+                20,
                 "Sceptre de Poséidon",
                 "description",
-                new FuzeItemStack(new ItemStack(Material.STICK))
+                new FuzeItemStack(new ItemStack(Material.CARROT_ON_A_STICK))
                         .setName("Sceptre de Poséidon"));
 
         setFiringRate(getFiringRate() * 5);

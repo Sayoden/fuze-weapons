@@ -12,9 +12,10 @@ public class MachineGunWeapon extends AWeapon {
 
     public MachineGunWeapon() {
         super("MachineGunWeapon",
+                5,
                 "Mitraillette",
                 "description",
-                new FuzeItemStack(new ItemStack(Material.DIRT))
+                new FuzeItemStack(new ItemStack(Material.CARROT_ON_A_STICK))
                         .setName("Mitraillette"));
 
         setFiringRate(getFiringRate() / 10);

@@ -23,9 +23,10 @@ public class FishLauncherWeapon extends AWeapon {
 
     public FishLauncherWeapon() {
         super("FishLauncherWeapon",
+                15,
                 "Lanceur de poisson",
                 "description",
-                new FuzeItemStack(new ItemStack(Material.TROPICAL_FISH))
+                new FuzeItemStack(new ItemStack(Material.CARROT_ON_A_STICK))
                         .setName("Lanceur de poisson"));
 
         setFiringRate(getFiringRate() * 5);

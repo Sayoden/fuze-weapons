@@ -34,18 +34,8 @@ public class WeaponListener implements Listener {
             if (weapon.isPresent()) {
                 event.setCancelled(true);
                 weapon.get().shoot(player);
-                Bukkit.broadcastMessage(name);
-                Bukkit.broadcastMessage("Bullets " + ItemUtils.getTag(itemInHand, "bullets", Integer.class));
             }
         }
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "MachineGunWeapon");
-        FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "LaserWeapon");
-        FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "PoseidonWeapon");
-        FuzeWeapon.getPlugin().getWeaponService().giveWeaponToPlayer(event.getPlayer(), "FishLauncherWeapon");
     }
 
 }

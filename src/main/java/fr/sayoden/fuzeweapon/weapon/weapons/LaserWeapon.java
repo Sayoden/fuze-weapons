@@ -20,9 +20,10 @@ public class LaserWeapon extends AWeapon {
 
     public LaserWeapon() {
         super("LaserWeapon",
+                10,
                 "Laser",
                 "description",
-                new FuzeItemStack(new ItemStack(Material.DIAMOND))
+                new FuzeItemStack(new ItemStack(Material.CARROT_ON_A_STICK))
                         .setName("Laser"));
 
         setFiringRate(getFiringRate() / 10);

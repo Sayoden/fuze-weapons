@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "minecraft:item/carrot_on_a_stick"
+  },
+  "overrides": [
+    {"predicate": {"custom_model_data":5}, "model": "item/machinegunweapon"},
+    {"predicate": {"custom_model_data":10}, "model": "item/laser_gun"},
+    {"predicate": {"custom_model_data":15}, "model": "item/fish_launcher"},
+    {"predicate": {"custom_model_data":20}, "model": "item/trident"},
+    {"predicate": {"custom_model_data":25}, "model": "item/invoker"}
+  ]
+}

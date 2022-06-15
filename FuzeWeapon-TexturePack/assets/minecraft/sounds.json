@@ -1,0 +1,47 @@
+{
+  "machinegunweapon": {
+    "subtitle": "music plays",
+    "sounds": [{
+      "name": "custom/machinegun",
+      "volume": 1,
+      "pitch": 1,
+      "preload": true
+    }]
+  },
+  "laserweapon": {
+    "subtitle": "music plays",
+    "sounds": [{
+      "name": "custom/lasergun",
+      "volume": 1,
+      "pitch": 1,
+      "preload": true
+    }]
+  },
+  "fishlauncherweapon": {
+    "subtitle": "music plays",
+    "sounds": [{
+      "name": "custom/fishlauncher",
+      "volume": 1,
+      "pitch": 1,
+      "preload": true
+    }]
+  },
+  "poseidonweapon": {
+    "subtitle": "music plays",
+    "sounds": [{
+      "name": "custom/poseidonalarm",
+      "volume": 1,
+      "pitch": 1,
+      "preload": true
+    }]
+  },
+  "invokerweapon": {
+    "subtitle": "music plays",
+    "sounds": [{
+      "name": "custom/invokerweapon",
+      "volume": 1,
+      "pitch": 1,
+      "preload": true
+    }]
+  }
+}
