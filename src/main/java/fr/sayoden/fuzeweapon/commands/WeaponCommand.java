@@ -26,7 +26,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
                             player.sendMessage("§aVous venez de récupérer toutes les armes");
                         } else {
                             weaponService.giveWeaponToPlayer(player, args[0]);
-                            player.sendMessage("§aVous venez de récupérer toutes les armes");
+                            player.sendMessage("§aVous venez de récupérer l'arme " + args[0]);
                         }
                     }
                     default -> player.sendMessage("§cVeuillez utiliser la command: §7/weapon nom");
